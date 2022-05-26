@@ -33,7 +33,7 @@ function CreateCartoons() {
   return (
     <>
       <Navigation />
-      <Typography variant="h1" gutterBottom>
+      <Typography variant="h1" gutterBottom sx={{ marginTop: 10 }}>
         {title}
       </Typography>
       <form>

@@ -1,5 +1,6 @@
 import { Modal, Box, Typography } from '@mui/material';
 import { useState } from 'react';
+import { styled } from '@mui/material/styles';
 
 import Navigation from '../../components/Navigation';
 import CartoonCard from './CartoonCard';
@@ -15,6 +16,19 @@ const cartoons = [
 function Cartoons() {
   const [open, setOpen] = useState(false);
 
+  const CenterModal = styled(Modal)({
+    display: 'flex',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    backgroundColor: 'background.paper',
+    transform: 'translate(-50%, -50%)',
+    width: 250,
+    border: '2px solid #000',
+    justifyContent: 'center',
+    alignContent: 'center',
+  });
+
   const [currentCartoon, setCurrentCartoon] = useState({});
   const handleClose = () => {
     setOpen(false);
@@ -28,7 +42,7 @@ function Cartoons() {
   return (
     <>
       <Navigation />
-      <Typography variant="h1" gutterBottom>
+      <Typography variant="h1" gutterBottom sx={{ marginTop: 10 }}>
         Cartoons
       </Typography>
       {cartoons.map((cartoon) => {
@@ -42,22 +56,16 @@ function Cartoons() {
           />
         );
       })}
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+
+      <CenterModal open={open} onClose={handleClose}>
         <Box>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography variant="h6" component="h2">
             {currentCartoon.title}
           </Typography>
           <img src={currentCartoon.image} />
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {currentCartoon.description}
-          </Typography>
+          <Typography sx={{ mt: 2 }}>{currentCartoon.description}</Typography>
         </Box>
-      </Modal>
+      </CenterModal>
     </>
   );
 }
